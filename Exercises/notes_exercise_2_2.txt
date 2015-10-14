@@ -1,0 +1,45 @@
+
+Notes for Exercise 2.2
+Walid Chatila, 9/9/15
+
+Question: 
+
+# Write a python program to find the position and the translation frame number of the first start-codon in the DNA sequence: gcatcacgttatgtcgactctgtgtggcgtctgctggg
+
+The method used to solve the exercise:
+
+	•The DNA sequence being analyzed and the start codon are first inputted as strings. 
+	•In order to locate the position of the start codon the .find() method is implemented. 
+		oThis will result in the index of the string where the start codon is located for the first time.
+		oString indices start with 0, 1, 2, 3, 4, etc. 
+	•After finding the index of the start codon, the translation frame number needs to be determined. 
+		oSince there are three nucleotides in a translation frame, the modulus method will be used to give the remainder of the instance of the start codon divided by 3, representing the sections of the translation frame.
+		oThe remainder will be the value of the translation frame that the start codon beings in. 
+		oTo accommodate for a zero value, which occurs when there is no remainder, one will be added to the value.
+		oThis accommodation will give a result of 1, 2, or 3 instead of the original 0, 1, or 2. 
+	•Since string indices start with zero, one will be added to the index found by the FIND method. This addition will portray the actual position of the start codon. 
+	•Finally the DNA sequence, the position of the start codon, and the translation frame number are printed out on separate lines. 
+
+Strength and Weakness of the method used:
+	•This solution can only take in a string input for both the start codon and the DNA sequence.
+		oThis string can be a combination of letters, numbers, or symbols. 
+		oIf the string is a combination of letters, it can be either lowercase or uppercase
+		oThe desired input for the DNA sequence should be a string of nucleotides (a, t, g, or c) 
+	•The solution will work for a DNA sequence of any length. 
+	•The solution will not work properly if the DNA sequence is in uppercase, if the string is made up of numbers or symbols, or if the start codon is not present in the DNA sequence. 
+		oThere will be an output, however this is an incorrect answer. 
+		oThis is due to the fact that the FIND method will return “-1” if the start codon is not found. 
+	•If there is more than one start codon located in the DNA sequence.
+		oThe solution will only output the first position of the start codon. 
+		oThis is because the FIND method only finds the first instance of the object being searched for.
+
+Lessons Learned from writing of this solution:
+	•How to use the find() method. 
+		oIt will return “-1” if the object is not found within the string. 
+		oIt will only find the first instance of the object within the string.
+	•How to use the modulus operator.
+		oIt is remainder from diving two values. 
+			-It will return 0 if there is no remainder.
+			-Ex: 4%3 = 1
+			-Ex:  6%3 = 0 
+			-Ex: 8%3 = 2

@@ -1,0 +1,64 @@
+Exercise 10.1
+Walid Chatila, 10/12/15
+
+ Write a program that reads the microarray data in "data.csv" and computes the mean and standard deviation of the expression values of a specific gene overall, and within each sample category. 
+	- Get the name of the microarray data file from the command line.
+	- Get the name of the gene from the command-line. 
+----------------------------------------------------------------------------------------------------------------------------------------
+
+- Methods: 
+
+	This program will read in a csv file and the specific gene that is being analyzed. It will then read the csv file into a dictionary like instance. The mean and standard deviation of the gene expression values will be determined. Also the expression values for each tumor category of the gene will be determined as well.
+
+	There were will be two arguments that will be taken in on the command-line in addition to calling the program. The first is the csv file name and the second is the name of the gene being analyzed. An if statement is used to ensure that there are three arguments in total being passed in on the command-line. If there is a missing argument an error message will be printed to the screen and the program exit back to the command-line. 
+
+ 	def readfile_getcolumns(file, gene):
+
+		This function takes in the csv file and the selected gene as parameters. The csv file is opened and then using the DictReader method, it is read into a dictionary-like iterable object. Next this object is iterated through using a for loop. The 'TUMOUR' and selected gene columns will be located from the dictionary-like object and their values will be appended to an empty list. 
+
+		The gene values of the list are then converted to floats using the map method. While the tumour values are converted to integers using the map method as well.
+
+		These two newly created lists will be returned in a dictionary. 
+
+	def tumour_category(gene_list, tumour_list):
+
+		This function iterates through the tumour_list by indices. It will then check if the value is category 1 or 2. Based on this result it will append the values of the gene that are associated with each of the tumour categories to a new list. These two newly created lists, cat1 and cat2, are returned in a dictionary. 
+
+	def mean_stdv(list): 
+
+		This function uses to lambda functions to find the mean and standard deviation of a list of values. 
+
+		The mean is simply found by dividing the sum of the list by the number values in the list. 
+
+		The standard deviation function is more complicated. List comprehension is used to find the sum of all the values squared in the list. The rest of the function is taken directly from the standard deviation function and is written out in the lambda function.
+
+		This function ends up returning the mean and the standard deviation in a dictionary. 
+
+	Finally for the output, the functions described above are called, with their values being saved in variables that have names describing what is contained in them. After the 3 desired lists are created (gene_list, cat1, cat2) the mean_stdv function is called for each of these lists to return the mean and standard deviation of each of the lists. The results of this calling are then printed out with strings to illustrate the correct values. 
+--------------------------------------------------------------------------------------------------------------------------------
+
+- Strengths and Weaknesses: 
+
+The use of the csv module allows an easy, efficient, and robust way of reading through csv files and extracting the data in to a dictionary like object. 
+
+The math module allows for the use of sqrt() method which is an easy way of finding the square root. 
+
+The lambda functions used in the mean_stdev function allow for two separate functions to be used in one call. 
+
+The use of a lambda fuction for finding the standard deviation could be avoided by using other modules(which have not been covered in class yet), such as NumPY. 
+
+By returning all the values in dictionaries, it limits the number of global variables being called and keeps the code looking organized. 
+
+Variables and Functions names represent their proper meanings and purpose.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+-Lessons Learned:
+
+How to use the CSV module and its methods.
+
+How to use the math module and its methods. 
+
+How to implement two lambda functions into one function. 
+
+How to iterate through a DictReader object. You cannot get a key-value pair from this object. It can only be accessed through iteration.

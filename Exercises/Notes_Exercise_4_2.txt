@@ -1,0 +1,46 @@
+Notes for Exercise 4.2
+Walid Chatila   9/21/15
+
+Write a Python program to determine whether or not a DNA sequence consists of a (integer) number of (perfect) "tandem" repeats.
+
+-------------------------------------------------------------------------------------
+
+Method:
+
+This program utilizes two functions, check_repeat and check_for_tandem, to determine if a DNA sequence consists of a number of tandem repeats. 
+
+-check_repeat(seq, size)
+
+This function takes in two parameters the whole dna sequence (string) and the size of the thought to be repeat (integer). To determine what the thought to be repeated sequence is, the size that is inputted will be used as an index to return that specif sequence from the beginning of the original sequence to the index that is equivalent to the size. Next, the number of times this sequence is repeated is found by dividing the length of the original sequence by the length of this repeat (which is the inputted size). Finally an if/else stamen is used to check if the original sequence is equal to the string concatenation of the repeated sequence times the number of repeats calculated above. If the string are equivalent, then there is a math and the function will return True. 
+
+check_for_tandem(seq)
+
+This function is used to check if a tandem repeat is present in a given DNA sequence. Firstly the upper() string method is used to change the sequence to uppercase. Then a for loop goes through a range from 1 to the length of the sequence (these integers represent the indices of the sequence). 
+
+Since the tandem repeat has to be a perfect fit, it is known that there can't be any leftover nucleotides. An if statement is used to limit the number of times the function will check for repeats by calling the check_repeat function. This if statement checks if there is a remainder left when the length of the sequence is divided by the variable being iterated. If the remainder comes out to zero, the check_repeat function is called passing in the original sequence and the iterated variable as the size parameter. If this function returns true, a print statement is printed stating that this sequence is in fact a tandem repeat. The first time that this print statement is executed in the loop a break statement is used to get out of the loop. This break prevents the loop from continuing to test all the other options after it has already been determined that the sequence consists of a tandem repeat. 
+
+In addition another if statement is used to check for the case that there is no tandem repeat present in the sequence. The variable yes is initiated as 0 at the start of the function. If the check_repeats function returns True when called, yes will be changed to 1. The if statement will check if yes is still equal to 0. If it is in fact 0 then a print statement states that this sequence does not have a tandem repeat. 
+
+
+- This program uses a command line input method. The sys library is imported at the start of the program. The input sequence is set to be the first argument given on the command line. 
+------------------------------------------------------------------------------------
+
+Strength and Weaknesses: 
+
+- This program will take in any string input. The desired input is a string of nucleotide (A,T,G,C), however they can be inputted as uppercase or lowercase.
+
+- Using the break in the for loop always the program to be more efficient because it will not have to keep looping through the range and checking for repeats if one has already been found. 
+
+- The use of the command line input allows the person running the program to input their desired sequence. 
+
+- The variables and functions names represent their true meaning and purpose. 
+
+------------------------------------------------------------------------------------
+
+Lessons Learned:
+
+- How to use the iterated variable as a inputted parameter for calling another function. 
+
+- How to implement the command line input.
+
+- How to use the break method to allow for an early exit of a for loop.

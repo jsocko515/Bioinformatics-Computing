@@ -1,0 +1,33 @@
+Notes for Exercise 9.2
+Walid Chatila, 10/5/15
+
+Write a program to compute and output the frequency of each nucleotide in a DNA sequence using a dictionary, Output the frequencies in most-occurrences to least-occurrences order.
+-----------------------------------------------------------------------------------------------
+
+- Methods: 
+
+The purpose of this program is to compute the frequency of each nucleotide in a DNA sequence and to return the frequencies in the most to least frequencies order. 
+
+count_freq(sequence):
+
+	The sequence is iterated through using a for loop by each nucleotide. For every nucleotide the get method is used to return the nucleotide from the count dictionary. If the nucleotide is not present, a 0 is returned which will in turn create a key value pair with the nucleotide and the count as 0. After this, one will be added to the count. This will then go through the whole sequence and adding one to the count for each nucleotide.
+
+	List comprehension is use to loop through the keys and values of the count dictionary. The loop goes through a sorted dictionary, which uses a key defined by a lambda function. This lambda function will define key as the second index of the items() which consist of the key, value pairs. The value stands for the count portion of the count dictionary. Also, the reverse parameter of the sorted method is set to True, which will also sort the dictionary in the reverse order. This will return a sort with the most occurrences to least occurrences. The resulted loop will be place into the freq list, by appending the key values pairs as a tuples.
+
+	Finally in the output portion of the program, the freq list is iterated through, and the nucleotides and their frequencies are printed out. 
+
+	------------------------------------------------------------------------------------------
+
+- Strength and Weaknesses:
+
+	The use of list comprehension makes the code robust and more concise. 
+
+	The lambda function in the sorted method will allow the sort to be by the values portion of the dictionary. Also by using the Boolean with the reverse parameter, the sort is set to the reverse order in a organize and clean code. 
+
+	-----------------------------------------------------------------------------------------
+
+- Lessons Learned:
+
+	How to implement lambda functions.
+
+	How to use the sorted method and use the key and reversed arguments.

@@ -1,0 +1,63 @@
+Notes on Exercis 7.1
+Walid Chatila, 9/28/15
+
+Using just the concepts introduced so far, find as many ways as possible to code DNA reverse complement (at least 3!)
+
+----------------------------------------------------------------------------------------------------------
+
+-Methods: 
+
+rev_complement_1(seq): 
+
+This function utilizes lists and their methods to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase. The sequence is first changed into a list of strings. The nucleotides and their complements are organized in lists with the same indexes. The reversed(seq) method is used when iterating through the sequence to allow for a reversed iteration. An if statement is used to check if the nucleotide from the sequence is and A, T, G, or C. If it is the complement is found by getting the same index from the complement list. If the nucleotide is not one of the ones listed above, the same nucleotide is returned as its complement. The complement is then added to a reverse complement list and is then joined together as a string using the .join() method and returned. 
+
+rev_complement_2(seq): 
+
+This function utilizes a dictionary and its methods to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase. The dictionary has key-value pairs of nucleotides and its complements. The reversed(seq) method is used to iterate through the sequence by each nucleotide in a reversed order. An if statement is used to check if the nucleotide from the sequence is and A, T, G, or C. If it is the complement is found by getting the same index from the complement list. If the nucleotide is not one of the ones listed above, the same nucleotide is returned as its complement. The complement is then added to a reverse complement list and is then joined together as a string using the .join() method and returned. 
+
+rev_complement_3(seq):
+
+This functions uses strings and their methods to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase.  Two strings are initialized, one with the nucleotides A, T, G, and C, while the complement string has the complements for the above nucleotides in the same indices. The reversed(seq) method is used to iterate through the sequence by each nucleotide in a reversed order. An if statement is used to check if the nucleotide from the sequence is and A, T, G, or C. If it is the complement is found by getting the same index from the complement string. If the nucleotide is not one of the ones listed above, the same nucleotide is returned as its complement using the join method. This reverse complement string is then returned. 
+
+rev_complement_4(seq): 
+
+This function uses strings and the translation table method to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase.  Two strings are created including the nucleotides: A, T, G, C, and N, while the complement string has the complements located in the same indices. The translation table is created using the .maketrans() method by giving it the two strings created above. The translate method is used on the sequence string to translate the sequence and return the complements for each of the nucleotides using the translation table created above. Finally the reverse of the complement string is returned by using the notation [::-1]. 
+
+rev_complement_5(seq): 
+
+This fucntion uses strings and if/elif/else statements to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase. The sequence is iterated through in the reverse order using the reversed() method. For every nucleotide A, T, G, or C, an if statement is used to check if the nucleotide from the sequence matches the nucleotides listed above. If they are the same the complement is set and joined to the reverse complement string. Finally if the nucleotide is not one of ones listed above, it is set to the complement and joined to the reverse complement string. This new reverse complement string is returned. 
+
+rev_complement_6(seq): 
+
+This function utilizes a list of tuples and list methods to return the reverse complement of a DNA sequence. The .upper() method is used to change the sequence to uppercase. A list of tuples is created which contain the nucleotides and their corresponding complements. First the sequence is iterated through by each nucleotide, for each nucleotide a nested loop is used to iterate through the list of tuples. If the nucleotide is equivalent to one of the nucleotides in the list of tuples, its complement is taken from the tuple and append to the complement list. A nuc_in_seq variable is initialized to False and is used to return a complement for a nucleotide not present in the list of tuples. When the nucleotide is present it is changed to false. However if it is not, an if statement will check the state of the variable, if it is in fact false, the nucleotide will be added as the complement and added to the complement list. Finally the complement list is reversed using the reversed method. This reversed list is then joined as a string and returned. 
+ 
+ ---------------------------------------------------------------------------------------------------------
+
+ -Strength and Weaknesses:
+
+
+The robustness of all the functions are about the same with the exception of rev_complement_4(seq). This function does not have the ability to take in a nucleotide that is not one of the expected one. The only way to do this would be to add all of the letters to the translation table. 
+
+
+When it comes to the speed of the functions I believe that a nested for loop approach in rev_complement_7(seq) should be the fastest. Usually dictionaries are not as fast as other string methods. 
+
+All these functions return the correct reverse complement string for a given DNA sequence of any length.
+
+The dictionary approach in rev_complement_2 appears to look the cleanest and it's easy to add in other key-value pairs. 
+
+----------------------------------------------------------------------------------------------------------
+
+-Lessons: 
+
+How to create a dictionary and iterate through it.
+
+How to create a translation table and use it in a function. 
+
+How to use the reversed method. 
+
+How to create lists of strings and lists of tuples. 
+
+How to use the join method and return a string of a list. 
+
+
+

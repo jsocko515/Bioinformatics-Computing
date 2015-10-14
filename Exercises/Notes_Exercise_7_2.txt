@@ -1,0 +1,74 @@
+Notes Exercise 7.2
+Walid Chatila,   9/28/15
+
+Write a program that takes a codon table file (such as standard.code from the lecture) and a file containing nucleotide sequence (anthrax_sasp.nuc) as command-line arguments, and outputs the amino-acid sequence.
+
+----------------------------------------------------------------------------------------------------------
+
+-Methods: 
+
+There are two separate functions used in this program, the first one opens the amino acid code table and reads it into two separate dictionaries. The second function uses these created dictionaries and the inputted sequence to return the amino acid sequence. 
+
+def create_table(seq):
+
+This function opens the file containing the codon table then loops through it and splits the columns by white spaces into lists with three separate indices. The first one contains the key, the second is the equals sign, and the third is the value (codons, start codons). Each of these indices of the lists is then assigned to either key or value and then added into the dictionary called data. Finally the file is closed. 
+
+The values created for each of the keys above are then assigned to a variable corresponding with the key name. The dictionaries codons and init are initiated. A for loop is used to iterate through the length of the amino acids that are in the aa variable. The itterated value will of the amino acid sequence corresponds with the three bases that make up that codon. 
+	Ex: aa[0] = F --> b1[0] = T --> b2[0] = T --> b3[0] = T 
+	These three base values are then added together to form the codon that makes up the amino acid. In the example above one of the codons for F is TTT. This codon is then added to the codon dictionary as a value and the amino acid corresponding to it as the key. 
+
+The init dictionary is populate through the same loop however for every amino acid (iterated value), the start codon value of the data dictionary is checked to see if it contains an M. If there is in fact an M, the init dictionary is populated with the Boolean True, for the corresponding index of the amino acid. This is then added to the dictionary as the value with the codon being the key. On the other hand if the M is not present, a False Boolean will be added instead. 
+
+Finally the dictionary constructor is used to return the codon table and the init table as values with corresponding strings as their value. 
+
+When the function is called it'll be added to the variable output which will inturn be a dictionary with the above returned values. 
+
+def amino_acid_seq(seq):
+
+First the codon dictionary and the init dictionary are set to a corresponding variable from the output dictionary which is a global variable. The file containing the sequence that is being inputted with be opened. This sequence is then joined together using the join method and the split method is used to get rid of any white spaces. This will return the sequence as a string. The file is then closed. 
+
+A for loop is used to iterate through the length of the sequence by a step of 3. To get the codons from the sequence the iterated value and the value plus three is indexed out of the sequence. This will return three nucleotides starting with the position of the iterated value and the next two.
+  ex)   i     codon 
+  	--------  -------- 
+  		0 		seq[0:3]
+  		3 		seq[3:6]
+  		6		seq[6:9] 
+
+  The codon that is spliced out will be used to check for the corresponding amino acid from the codons dictionary. Once the amino acid is found it is added to the amino acid sequence list by using the append method.  After the all the amino acids have been determined and added to the amino acid list, it is converted to a string using the join method. 
+
+  To check if the first codon is actually a valid start codon a series of if/else statements are used. The if statement determines if the free three nucleotides (first codon) correspond to a True value in the init dictionary. If it is True, the starts_with_start_codon variable is set True, if not it will be set to False. 
+
+  Finally the dictionary constructor method is used to return the original sequence, the amino acid sequence, and the start codon check in a dictionary with corresponding strings as key-value pairs. 
+
+  When the function is called the returned dictionary key-value pairs will be added to the variable output, which at this point already contains the codon dictionary and the init dictionary. 
+
+
+Finally the original sequence, amino acid sequence, and start codon checker are printed out of the output dictionary and returned to the user. 
+
+
+This program also uses a command line input method to allow it to be more robust. This allows the user to enter in any codon table as well as any sequence. 
+
+----------------------------------------------------------------------------------------------------------
+
+-Strength and Weaknesses: 
+
+This program is robust and allows for any codon table or sequence to be inputted due to the utilization of command line input method. 
+
+By returning all the values using the dictionary constructor, they are all added to a global dictionary which can then be accessed anywhere throughout the program.
+
+The variables and function names are named in a way that properly illustrate their meaning and purpose. 
+
+The use of dictionaries throughout this program allow for a clear representation of the codon table that is inputted. 
+
+----------------------------------------------------------------------------------------------------------
+
+-Lessons Learned:
+
+How to read in a file, use it, and close it. 
+
+How to use the dictionary constructor method when returning values. 
+
+How to use dictionaries and extract keys and values. 
+
+
+

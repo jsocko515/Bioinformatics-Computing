@@ -1,0 +1,63 @@
+Notes for Exercise 8.1
+Walid Chatila,   10/5/15
+
+Modify your DNA translation program to translate in each forward frame (1,2,3)
+Modify your DNA translation program to translate in each reverse translation frame too.
+Modify your translation program to handle 'N' symbols in the third position of a codon. If all four codons represented correspond to the same amino-acid, then output that amino-acid. Otherwise, output 'X'.
+------------------------------------------------------------------------------------------------------------------------------------------
+
+-Method: 
+
+This is a modified program of the previously written program that translates a DNA sequence and returned the amino acid sequence. The modifications will now allow the program to find the translated sequence for all the frames (1, 2, 3, -1, -2, -3). In addition, if the third codon is an "N", it will determine if all four of the codons that are represented by substituting the N with A, T, G, or C will correspond to the same amino-acid. 
+
+The program uses the command-line input method to input a file for the codon table and a file for the sequence. An if statement is used to check that two arguments have been given when calling the program, and will return a message to the user to remind them to return the file names. 
+
+def create_table(table):
+	This function has not been altered since the last program. The only difference is that when the function is called it'll be added to the variable "tables", which will in turn be a dictionary with the above returned values.  
+
+def sequence(seq):
+	Instead of opening the sequence file in the amino_acid_seq function, I have created a separate function that will do this. This function will open the file, remove the white spaces and get joined together to form a string. When called the string will be saved to the variable sequence. 
+
+def rev_complement(seq):
+	This function was added to take care of finding the negative frames, which would be the reverse complements. This function is short and robust. It has a dictionary of all the nucleotides and their complements and uses the map method to apply the get method to return the corresponding complements of the reversed sequence. Also, the lambda function is used to define the nuc that is used by the get method when looking through the dictionary to return the complement. The returned valued will be save to the variable rev_comp_seq. 
+
+def frames(seq, reverse_complement, codons, init)
+	This function is the main function used to allow for the output of multiple frames. The point of this function is to return the amino acid sequence for the different frames. A for loop is done on the integers 1, 2, and 3, the iterated value and its negative value, corresponding to a frame and its negative frame, will be passed on to the amino_acid_seq function as parameters defining which frame to translate. When the negative frame is passed as a parameter, the revers complement sequence is also passed in instead of the regular sequence. This will return a dictionary of all the frames with their corresponding amino acid sequences. 
+
+def amin_acid_seq(seq, frame, codons, init):
+	This function has been altered slightly since last time to allow for the checking of multiple frames, as well as take into consideration what amino acid is returned when the third position of a codon is an N. Firstly, the sequence is modified when the frame being translated is not 1 or -1; the absolute value of the frame is taken, and then 1 is subtracted from the frame number. The leftover result will correspond to the number of N's that will be added on to the end of the sequence. This will ensure that a codon is complete and not missing nucleotides. Although this seems pointless here, it will make more sense when the rest of the function is explained.
+
+	The range of the sequence is iterated through with a for loop from the frame-1 till the end of the sequence with a step value of 3. The reason the frame has 1 subtracted from it is to allow the actual frame number to match up to the indices value. Ex. 1 --> index 0 of seq, -1 --> index 0 of rev_comp, 2 --> index 1 of seq. To get the codons for the sequence, the iterated value is used and the sequence that is inputted will be indexed from that iterated value until the value plus 3. This will return every codon of the sequence throughout the loop (every 3 nucleotides). 
+
+	The new part of this function firs checks if this codon is present in the codon table using an if statement. If this codon is present, the amino acid will be taken from the codon dictionary and appended to the amino acid list. However, if it is not there are two scenarios that will occur. First, if the codon has only 1 N present in it and if this N is located in the third position, the aa_checker function will be called. This function which will be explained in detail below will determine whether this codon represents only one amino acid or not. Finally, if the codon does not match with a codon and does not satisfy the above statement in regards to the N in the third positon, it will be added to the amino acid list as an X. 
+
+	This last part of this function has not been altered. It returns a Boolean value if the first codon corresponds to a true start codon. 
+
+	When this function is called from the frames function, the returned dictionary, which consists of the amino acid sequence, and the start codon Boolean will be added to the frames dictionary. Which will in turn be a dictionary that consist of another dictionary,. 
+def aa_checker(codons, codon): 
+
+	This function is what is used to determine if more than one amino acid can be translated from a codon that has only one N and located in the third position. This codon takes in both the codon dictionary and the codon value from the amino_acid_seq fucntion. It will first loop through a list of the expected nucleotides, A, T, G, and C. The iterated value will then be added on to the first two symbols of the codon. So the N will be replaced with all the values from the expected nucleotides list. These new codons will now be checked with the codon table dictionary to see if they have a corresponding amino acid. This amino acid will be added using the set method add, to a set called aa_check. The set is used because it will not allow for the same amino acid to be added more than once. At the end of this, the length of the set will be check to see if more than one amino acid are translated for the various codon. If all of the codons made through the loop above translate to one amino acid sequence, this amino acid sequence will be returned back to the amino_acid_seq function and will be used as the amino acid in the sequence. However, if there are multiple amino acids that can be translated, and X will be returned instead. To return the expected value, the pop method is used to take out the value from the aa_check set.  
+
+Finally for the output of this program, the frames dictionary will be looped through and for every frame, the corresponding amino_acid sequence will be printed as well as the start_codon boolean. 
+
+----------------------------------------------------------------------------------------------
+
+-Strength and Weaknesses: 
+
+When the functions is this program return more than one variable, they will return them as a dictionary too allow for a more organized looking code. This also makes it easier to keep track of the global variables throughout the program. 
+
+The reverse complement function is concise and robust. Instead of looping through the sequence the map method is used which could be interpreted as a faster way of accomplishing the task. Although it might take up more memory, its strengths outnumber the weakness of this technique. 
+
+The frames method only uses one for loop to get both the positive and negative frames. 
+
+In the aa_checker function, a set is used because it doesn’t allow for the same values to be added. This makes it easier to determine if more than one amino acid are translated from the various codons created in the for loop. 
+
+----------------------------------------------------------------------------------------------
+
+- Lessons Learned:
+
+How to use sets and their methods.
+
+How to properly return variables as a dictionaries from functions. I did this incorrectly in the previous assignment. As I save the dictionaries to the same variable, which would overwrite my existing values. This however did not affect the code, but it could have if I had tried to call the returned values from the earlier functions at a later point in the program. 
+
+How to implement lambda functions and get methods into my functions to allow for a more robust code.

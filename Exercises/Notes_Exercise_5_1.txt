@@ -1,0 +1,34 @@
+Notes for Exercise 5.1 
+Walid Chatila  9/21/15
+
+Write a command-line program to compute the reverse complement sequence for the forward #and reverse primer.
+------------------------------------------------------------------------------------
+
+Method: 
+
+This program utilizes the complement and reverse complement functions from Lecture 5. It also uses command-line input to take in two input; one for the forward primer and one for the reverse primer.
+
+complement(nuc):
+
+-This function has two strings called nucleotides and complement. The nucleotides string has different nucleotides that could be found in a sequence, including upper and lower case letter. The complement string has the nucleotides complement for each index of the nucleotide string located at the same position in the complement string. Ex: nucleotide[0] = A --> complement[0] = T. The string method .find() is used to look through the nucleotide string and see if the nucleotide inputted is located in the string. Finally an if/else statement is used to return the complement of the nucleotide. The if statement checks to see if the result from the find above is greater than 0. This is done because the find method will return -1 if the nucleotide is not found in the sequence. If the nucleotide is present, the complement of the nucleotide will be found with its index from the complement string. If the inputted nucleotide is not found, the complement will be what is inputted. 
+
+reverseComplement(seq):
+
+-This function will first change the sequence to uppercase using the .upper() method. A for loop is used to iterate through the nucleotides of the inputted sequence. For every nucleotide the complement function is called to return its complement. This result will then be added to the new string called newseq, it will be added to beginning of this string resulting in the reverse complement of the inputted sequence. 
+
+The sys library is imported to allow for the use of command line inputs. This program takes two additional arguments in addition to the command of running the program. The first additional argument is equivalent to the inputted forward primer and the second argument is equivalent to the inputted reverse primer. 
+------------------------------------------------------------------------------------
+
+Strength and Weakness: 
+
+- The use of the command-line input allows the user to input their desired forward and reverse primers. 
+
+- The complement function used here is easier to alter because any additional nucleotides/complements can be added at the end of their string respectively. 
+
+------------------------------------------------------------------------------------
+
+Lessons Learned:
+
+- How to setup more than one argument to be inputted as a command-line argument. 
+
+

@@ -1,0 +1,44 @@
+Notes for Exercise 2.1
+Walid Chatila, 9/9/15
+
+Question: 
+
+Write a python program to print out the codon for Methionine (aka the start codon) backwards in lower-case symbols.
+ - Represent Methionine as string variable codon = "ATG".
+ - Use only the techniques shown in lecture.
+
+
+The method used to solve the exercise:
+	
+	•In order to reverse the start codon it had to first be disassembled into separate nucleotides. 
+		oThe First nucleotide is in the zero index of the start codon. 
+		oThe second nucleotide is in the first index of the start codon.
+		oThe third nucleotide is in the second index of the stat codon. 
+	•After separating the start codon the individual nucleotides are reassembled in the reverse order to represent the reversed start codon. 
+		oThe separate nucleotides, which are now all separate string elements, are added in the reverse order to form a new string.
+		oEx: third + second + first 
+	•Once the start codon is reversed(in a new string), it is changed from lowercase to uppercase.
+		oThis is completed by using the .lower() method. 
+	•Finally the original start codon, the reversed start codon, and the reversed lowercase start codon are printed out on separate lines. 
+
+
+Strength and Weakness of the method used:
+
+	•This solution can only take in a string input.
+		oThis string can be a combination of letters, numbers, or symbols. 
+		oIf the string is a combination of letters, it can be either lowercase or uppercase.
+		oThe desired input should be a string of nucleotides (A, T, G ,or C) 
+	•Although there is a desired input, the solution will result in an output regardless of the type of string input. This output will not always solve the question at hand.
+		oIf a string of lowercase letters is inputted, the output will be the reverse of that string. 
+		oIf a string of number is inputted, the output will be the reverse of that string.
+		oIf a string of symbols is inputted, the output will be the reverse of that string.
+	•When an integer is inputted, a type error occurs because the solution will only take a string type.  
+		oTypeError: ‘int’ object is not subscriptable
+	•When letters or symbols are inputted without being in a string, a type error will occur because the solution will only take a string. 
+	oEx: abc
+		TypeError: name object ‘abc’ is not subscriptable
+
+Lessons Learned from writing of this solution:
+	•How to disassemble string into separate indices. 
+	•How to add separate strings to form a new string. 
+	•How to use the .lower() method on strings to change them from uppercase to lowercase. 

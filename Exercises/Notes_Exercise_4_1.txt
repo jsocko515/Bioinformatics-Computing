@@ -1,0 +1,62 @@
+Notes for Exercise 4.1
+Walid Chatila, 9/21/15
+
+Write a Python program to compute the reverse complement of a codon
+------------------------------------------------------------------------------------
+
+Method:
+
+This program uses two functions; the first is based off the complement function from lecture, the second is the reverse_complement function.
+
+-complement(nuc)
+
+This function uses a series of if/elif/else statements to take in a nucleotide (string) as a parameter and return it's complement (string).
+	-To account for both uppercase/lowercase, the functions will look at both cases. Ex: if nuc == "A" or nuc == "a": This is repeated throughout the functions for all the expected nucleotides (A,T,G,C,N).
+
+	Table of expected outputs:
+	Nuc:    Complement:
+	A or a 		T
+	T or t 		A
+	C or c 		G 
+	G or g 		C
+	N or n 		N 
+	other nuc 	OTHER nuc 
+
+-reverse_complement(codon)
+
+This function takes in a string of 3 nucleotides as its parameter (a string with more nucleotides can be inputted, but the function will only work for the first 3 nucleotides of the string). Firstly, the codon will be changed to uppercase using the .upper() string method, and will replace the original codon. Then the nucleotides are split up into three separate variables. This is don’t using the corresponding index value.
+
+Table of index/nuc postion
+ Nuc: 		Index:
+ 1st		  0 
+ 2nd 		  1
+ 3rd 		  2 
+
+ After the nucleotides have been assigned to three separate variables, the complement functions will be called from within this function. It is called three times using the three variables created above and the output will be assigned to a new variable, ex: comp_first_nucleotide - complement (first_nucleotide). To create the reverse complement codon; the three newest variables, comp_third_nucleotide, comp_second_nucleotide, and comp_first_nucleotide are added together using string concatenation in the order listed above. This new string is save to the variable reversed_comp_codon, and will be returned as the output of this function. 
+
+
+This program uses a command line input method. Sys is imported at the start of the program. The input_codon is set equal to the first argument that will be inputted on the command line. 
+
+For the output, a print statement is used to print the original input codon and its reverse complement codon. 
+
+------------------------------------------------------------------------------------
+
+Strength and Weaknesses: 
+
+-The main weakness of this program is that it will only work correctly for a codon (3 nucleotides). 
+	- In order to improve this program and allow it to be more versatile, it should be able to take in a sequence of any length and return it's reverse complement. This can be implement using the for loop as discussed in lecture. 
+
+- This program can take in any string input, however it is written for only nucleotides (A,T,G,C,N). The else statement of the complement function allows it to take in any other letter, number, or symbol inputted. 
+
+- The use of the command line input allows the user to test their desired input codon.
+
+-The names of the variables and functions clearly explain their meaning and purpose. 
+------------------------------------------------------------------------------------
+
+Lessons Learned:
+
+- How to implement if/elif/else statements, and use or to check for two conditions. 
+
+- How to call one function from another function. 
+
+- How to implement the command line input for the program.

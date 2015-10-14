@@ -1,0 +1,54 @@
+Notes for Exercise 5.2
+Walid Chatila   9/21/15
+
+Write a command-line program to test whether a PCR primer is a reverse complement palindrome.
+
+-------------------------------------------------------------------------------------
+
+-Method 
+
+This program uses multiple functions to test whether a PCR primer is a reverse complement palindrome. Two of the functions, complement(nuc) and reverseComplement(seq), were taken from the program written for Exercise 5.1. 
+
+The reverse complement function will loop through a sequence by nucleotides. For each nucleotide it will call the complement function to obtain that specific nucleotides complement. Then this complement will be added at the beginning of a new sequence to form the reverse complement sequence which is returned. 
+
+The main issue in writing this program was to determine what the result should be for an even or an odd sequence. Palindromic sequence are sequences that when read from 5' to 3' are equivalent to the complement sequence read from 5' to 3'. 
+
+Ex: 5' ATGCAT 3'  ---> Complement 3'TACGTA 5' (even case )
+Ex: 5' ATCAT  3'  ---> Complement 3'TAGTA  5' ( odd case )
+
+The approach that I took was to split the sequence in half and compare the first half to the complement of the second half. For the even cases the sequences would be split up perfectly. However, for the odd cases I chose to leave out the middle nucleotide when comparing the first sequence and the complement of the second sequence. The reason for taking this approach is because the middle nucleotide will nucleotide will never be the same as its complement. 
+
+Ex: 5' ATCAT 3' ---> Complement 5' ATGAT 3'. 
+
+By eliminating the middle nucleotide in the sequence, the program can check if the first half(excluding the middle nucleotide) is equivalent to the reverse complement of the second half(excluding the middle nucleotide). 
+
+
+split_seq(seq):
+
+- This is the function that will split the sequence in half and create two neq sequences. An IF statement is used to check if the sequence is even/odd by using the modulus method.  If the the sequence is even, the original sequence will be split in half and each of the two halves will be assigend to a new variable. If the sequence is odd, the original sequence will be split in half excluding the middle nucleotide and the new halves assigned to new variables as well. The two new sequences will be returned when this function is called. 
+
+check_rev_comp_palindrome(seq): 
+
+- This function will take in the sequence as a parameter and then call the split_seq function which will assign the returned strings to the variables seq1 and seq2. The reverse complement function is called to get the reverse complement of seq2. Finally an If/Else statement is utilized to check if seq1 is equivalent to the reverse complement of seq2. 
+
+
+This program also utilizes command-line input. This was done by importing the sys library and setting the inputSequence equivalent to the additional argument that will be given when running the program on the command-line. 
+
+------------------------------------------------------------------------------------
+
+Strength and Weaknesses:
+
+- The main problem with this program is that I used my interpretation of a palindromic sequence. There could be the case where the first part of a sequence is equivalent to the reverse complement of the second part of the sequence; while the middle nucleotides were not part of the palindrome. 
+
+Ex: 5' ATGACAAT 3' --> Complement 5' ATTGTCAT 3' 
+
+In this case only the first two and last two nucleotide will be checked to see if they are palindromic.  
+
+- This program will take in any sequence that is uppercase/lowercase and if it contains other nucleotides than the expected (A,T,G,C,N). 
+
+- The variable and function names illustrate their true meaning and purpose. 
+------------------------------------------------------------------------------------
+
+Lessons Learned:
+
+- To try and understand a given problem and give an answer with my own reasoning. Without the explanation of how this problem was solved the solution could be interpreted in many ways.

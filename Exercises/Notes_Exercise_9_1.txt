@@ -1,0 +1,33 @@
+Notes for Exercise 9.1
+Walid Chatila,     10/5/15
+
+Write a reverse complement function (and package it up as a program) as compactly as possible, using the techniques introduced today.
+-----------------------------------------------------------------------------------------------
+
+-Methods:
+
+The purpose of this program is to return a reverse complement function in a robust and concise function. I wrote two different functions that use different methods. The first uses list comprehension while the second use the map method.
+
+reverse_complement_list_comp(seq):
+
+	This function uses a dictionary with the values of nucleotides and their complements. The sequence is iterated through in the reverse order and for every nucleotide the get method is used to return the complement, however if the the nucleotide is not present, the same nucleotide is returned. The results will be appended to a string and returned. 
+
+reverse_complement_map(seq):
+
+	This function uses a dictionary with the values of nucleotides and their complements. The map method is used here to distribute the get method across the reversed sequence. A lambda function is used to define the nucleotide that is used with the get method.
+
+----------------------------------------------------------------------------------------------
+
+- Strenghts and Weaknesess: 
+
+Both these functions are concise and robust, however the map method is favored to the list comprehension. This is because the list comprehension is still using a for loop which could be thought has a slower method than the map method. However the map method does use up more memory. The map method uses the internal preprogrammed methods which are faster than the user programmed for loops. 
+
+----------------------------------------------------------------------------------------------
+
+- Lessons Learned:
+
+How to use list comprehension. 
+
+How to use the map method.
+
+How to use lambda functions.

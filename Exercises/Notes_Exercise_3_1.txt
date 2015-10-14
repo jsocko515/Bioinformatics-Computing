@@ -1,0 +1,64 @@
+Exercise 3.1 Notes
+Walid Chatila , 9/15/15
+Write a Python program to print answers to the following questions:
+ -Does the SASP gene start with a Met codon?
+ -Does the SASP gene have a frame 1 Met codon?
+ -How many nucleotides in the SASP gene?
+ -How many amino-acids in the SASP protein?
+ -What is the GC content (% G or C nucleotides) of the SASP gene?
+-----------------------------------------------------------------------------------------------
+
+Method:
+
+Different functions were written for each task being performed on the gene sequence.
+
+seq_upper(seq):
+
+	This function takes in seq as an input and then uses the string method .upper() to change from the string from lower case to uppercase.
+
+start_met(seq):
+
+	This function takes in seq as an input and then calls seq_upper to change the string to uppercase. Then the  string method .startswith() is used to check if the sequence 	beings with "ATG". An if/else statement is used to check if it does start with "ATG" and will then print a string accordingly.
+
+frame_1_met(seq):
+
+	This function takes in seq as an input and then calls seq_upper to change the string to uppercase. The frame is found by taking the modulus of the "ATG" position. After the remainder is found, one is added to that to return a results of 1, 2, or 3 instead of 0, 1, or 2. To find the "ATG" position, the string method .find() was used. Then an 
+if/else statement is used print out a string accordingly. The if statement will check if the frame is equal to 1.
+
+length_nucleotide(seq): 
+
+	This function takes in seq as an input and then calls seq_upper to change the string to uppercase. Then the string method len() is used to check for the length of the 		sequence by counting how many nucleotides are located in the string. A print statement is used to print this result.
+
+total_amino_acids(seq):
+
+	This function takes in seq as an input and then calls seq_upper to change the string to uppercase. Since three nucleotides make up an amino acid; the string method .len() is used to find the total number of nucleotide. The total number is then divided by 3 to give the number of amino acids. The result will be an integer because it does not make sense to return a float. A print statement is finally used to print out the results. 
+
+percent_GC(seq): 
+
+	This function takes in seq as an input and then calls seq_upper to change the string to uppercase. The string method .count() is used twice to find the number of "G" and "C" in the sequence and then are added together and changed to a float by using the string method, float(). This number is then divided by the total number of nucleotides, found with the string method len(), and then multiplied by 100 give a percentage. A print statement is used to print out the result which will be in the form of a float. 
+
+-------------------------------------------------------------------------------------------------------
+
+Strengths and Weaknesses: 
+
+- This program will take in any string as an input. The preferred input is a string composed of nucleotides (A,T,G, or C). It does not matter if the string is in uppercase or lowercase. The seq_upper function will ensure that all string are changed to uppercase.
+
+- The method uses multiple functions to allow for readability and clarity. 
+
+- Any gene sequence can be analyzed using this program. 
+
+- The names of the functions and variables are clear and represents their true meaning. 
+
+- The code is as concise as possible. Most of the computations used in the functions are written in one line of code. 
+
+---------------------------------------------------------------------------------------------------------
+
+Lessons:
+
+- The use of multiple string methods: .upper(), .find(), .startswith(), .count(), len()
+
+- How to define functions and call them.
+
+- How to call a function in another function. 
+
+- How to use if/else statements and check for a desired condition.
