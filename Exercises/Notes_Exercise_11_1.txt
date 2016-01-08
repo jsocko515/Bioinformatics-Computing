@@ -1,0 +1,66 @@
+Notes for Exercise 11.1
+Walid Chatila,  10/19/15
+
+Download human proteins from RefSeq and compute amino-acid frequencies for the (RefSeq) human proteome.
+	-Which amino-acid occurs the most? The least?
+Download human proteins from SwissProt and compute amino-acid frequencies for the SwissProt human proteome.
+	-Which amino-acid occurs the most? The least?
+How similar are the human amino-acid frequencies of in RefSeq and SwissProt?
+----------------------------------------------------------------------------------------------
+
+-Method: 
+
+	This program takes in two separate files (A refseq fasta file and a SwissProt file) and determines the amino acid frequencies for each one. In addition it determines the max and min frequencies for each file separately. Finally it will compare the two frequencies and find the difference between both. 
+
+	The program uses command-line input to take in two files. If the two files names are not inputted when running the program, an error message will appear and stop the execution of the program.
+
+	open_file(file):
+
+		This function was written to allow for the opening of the files and save them to a variable. It uses gzip method from the gzip library because the files have the extension .gz. 
+
+	aa_freq(file,type):
+
+		This function will take in the file name saved from the above variable and the type of file that it is. The file is iterated through the different records using a for loop. The parse method from the Bio.SeqIO library is used to split up the sequences and has the ability to separate the sequence from the headers and description. The sequence can be taken using the .seq method. For each seq_record, the sequence is iterated through with a nested for loop. The amino acids are counted using a dictionary. The get method is used to get the count value for each amino acid and then the count is increased by 1. After the count for each of the amino acids has been done, it is changed into percentages. 
+
+		The total number of amino acids is calculated using the sum method. Then a for loop is used to iterated through the items of the count dictionary. For every amino acid key, its value is changed to the percentage by dividing the amino acid count by the total count and multiplying by 100. 
+
+		This results in a return of a dictionary with amino acids as the keys and the frequency(percentage) as the values. 
+
+	compare(refseq, swiss):
+
+		This function will take in the two dictionaries of frequencies calculated in the aa_freq function. It will then add all of their keys to a set to get a record of all the amino acids that were seen in both files. A set is used because it does not have multiple records of the same object, so in this case each amino acid will only be represented once in the set. The update method is used to add all the values at once. This method does the same work as iterating through the keys and adding them individually. 
+
+		Three separate list are initialized with a tuple containing two string; showing the type of list and frequency. These are added in to organize the output and will be described in the print function. 
+
+		A for loop is used through the set of amino acids created above. For every amino acid the refseq frequency and swiss frequency is retrieved from the corresponding dictionary using the get method. Then the values are appended to the corresponding list with the amino acid as a tuple. For the compare list, the difference between the refseq and swiss frequency is calculated and appended to the list as a tuple with the amino acid. 
+
+		The last part of this program finds the max and min values of the list. Since the first item of the lists are the header tuples described earlier, everything but the first index will be used to find the max and min. For the min values of the refseq and swiss list, the zero values are excluded from this by using list comprehension. 
+
+		Finally the different list and their corresponding max and min values are returned in a dictionary.
+
+	print_output(dic_list, list, min, max):
+
+		To simplify the output for printing and organize it, this function was created to minimize the number of repeated code written. The first part prints out the header from each of the lists. Then a for loop iterated through the lists sorted by the first value of their tuples, which corresponds to the frequency. The amino acids and the frequency are then printed out.
+
+		The min and max values are also printed out for each of the lists. 
+----------------------------------------------------------------------------------------------
+
+-Strength and Weaknesses: 
+
+	- The aa_freq function does not save any of the sequences, with such a large file if it would save the sequences it would take up too much memory and slow down the execution.
+		-Instead it just accesses the sequences and saves the count of the amino acids. 
+
+	- Using the update method in the compare function, allows for a more robust and efficient code instead of having to use a for loop and the add method. 
+
+	- Having the print function minimizes the number of code that has to be repeated. 	
+
+	- This program will only work for files that have a .gz file extension. Also it will only work for a Fasta file and a Swiss file. To make it more robust, the type of file could be inputted on the command-line by the user. 
+
+----------------------------------------------------------------------------------------------
+
+- Lessons Learned:
+
+	-Implementing different methods from the Biopython Library
+		-The parse method can take in different file types, parse them and allow for different access of the file. 
+		-Using the seq method, I was able to only look at the sequence portion of each record. 
+	

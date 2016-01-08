@@ -1,0 +1,29 @@
+Notes for Excercise 13.2 (Bonus)
+Walid Chatila, 10/23/15
+
+Write a program to count the number of specta in the file "Data1.mzXML.gz" using ElementTree's iterparse function.
+	-How many MS spectra are there?
+	-How many MS/MS spectra are there?
+	-How many MS/MS spectra have a precuror m/z value between 750 and 1000 Da?
+------------------------------------------------------------------------------------
+
+-Methods: 
+	
+	This file is a gzip file, so in order to uncompress and open it, the gzip module is used and then it is saved to a variable. After looking at the contents of the file, the namespace is extracted and saved as a string variable.
+
+	Since this is a such a large file, the elemnttree iterparse method is used to parse through the file. The MS information is located inside the scan tags. So an if statment is used to check if the iterable is equiveltn to tag. Once insde the scan tag, an if/else statment is used to check the attributes of the scan tag. The MS spectra are euqivelent to msLevel:1 and the MS/MS spectra are equivelent to msLevel:2. Within the if/else statment a count of each of the spectras is kept. Finally to find out if MS/MS have a precuror between 750 and 1000; an if statement is used under the MS/MS part of the if/else statment from above. The precuror value is a tag that is within the scan tag of MS/MS spectra. The find method is used to get the precursor tag, and the text method is used to extract this value. This value is converted from a string to a float. If the value is between 750 and 1000, it is added to the ms2_precursor count.
+
+	Output:
+
+		The counts that were kept above are printed out. 
+-----------------------------------------------------------------------------------
+
+Strenghts and Weaknesses:
+
+	- The use of the iterparse method for such a large file
+
+----------------------------------------------------------------------------------
+
+Lessons Learned:
+	
+	- How to use the iterparse methods of elementTree.

@@ -1,0 +1,44 @@
+Notes for Exercise 13.1
+Walid Chatila, 10/23/15
+
+Write a program to pick out, and print, the references of a XML format 
+UniProt entry, in a nicely formatted way.
+
+------------------------------------------------------------------------------------
+
+-Methods:
+	
+	The purpose of this program is to take in a XML file from UniProt for a specific gene entry and return a list of the references. The approach in this code is to only return the Journal Articles as references. 
+
+	The accession library for the UniProt entry is entered on the command-line.
+	The urllib library is used to open the url, using the given accession number.
+
+	The elementtree library is imported and it's methods are used throughout this program. First the opened file is parsed through using the parse() method. The root of the xml file is saved to a variable using the getroot() method. Also, the file has namespaces added in before the tags of the different levels of file.
+
+	reference_createor(root, ns):
+
+		This function takes in the root and the namespace for the given xml file. A for loop is used to iterate through the root level and find all the entry tags. The name space is added to "entry" since it is used in the xml file. After this another for loop is used to iterate through all the reference tags for the entry. 
+
+		For each reference the citation tag is found using the find() method. If the citation attribute type is not 'journal article', the next reference is called. This is because this program only will return the journal article references. Under the citation tag, the find() method is used to locate the authorList tag. Two for loops are used to either iterate through the person tag or the consortium tag. For every iterated value, the person attribute is appended to a list. 
+
+		The key for the reference is save as an integer and extracted by using the attribute method. Then a dictionary is created to add in all the information for the specific reference. The authors list is added with a key of authors. The publish date is added and located by using the attribute method on the citation tag. The title of the article is located using the attribute method on the citation tag, and is added to the dictionary. The journal name, first page, and last page are also located using the method described above and added to the dictionary as well. Finally this specific reference dictionary is added using the key from above to a dictionary that will contain all the references. This dictionary will then be returned. 
+
+	Output:
+
+		The returned dictionary of reference dictionaries is iterated through using a for loop in key sorted order. The values for each of the references are printed out in the APA citation method to produce a list of all the references for journal articles found in this UniProt Entry. 
+------------------------------------------------------------------------------------
+
+Strengths and Weaknesses:
+ 	
+ 	- This program will only check for the journal articles instead of all the other references. 
+
+ 	- Although, it is a safer program, since it does not use the getiterator method, it will take more time using this approach. 
+
+ 	- There is no way to check for an invalid URL, if the URL is not valid, it will through an error. 
+------------------------------------------------------------------------------------
+
+Lessons Learned:
+	- how to read and interpret XML files
+	-how to import and implement elementtree methods 
+		-parse, findall, find, attrib, text, tag, 
+	- learned about namespaces in some xml files

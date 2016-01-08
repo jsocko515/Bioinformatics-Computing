@@ -1,0 +1,29 @@
+Notes for Exercise 21.1
+Walid Chatila    11/23/15
+
+Write a python program to lookup the scientific name for a user-supplied organism name.
+-----------------------------------------------------------------------------------------------------
+
+- Methods
+	This program is used to query the tables in taxa.db3 and return a scientific name when an organism name is provided. In order to accomplish this the sqlite3 library is imported so that the program can connect to the database. Once a connection is established with the database, a query can be created using a cursor. To execute this query, the execute method is used, and the obtained results are save in the cursor variable. To access the results, a for loop has to be used to iterate through them. 
+
+	In this case, the program wants to return a scientific name for an inputted organism name. The name table and the taxa table are both linked by a primary key called tax_id. The select query used here will get the scientific name from the taxonomy table, where the inputted organism name is located in the name table, however to create the relationship between the two tables the tax_id column has to be used. So it will return the scientist name from row in the taxa table where the tax_id is the same for both the name and taxa tables. This is how relationships are created in relational databases. 
+
+	After obtaining the results, they are iterated through and printed out to the user. 
+------------------------------------------------------------------------------------------------------
+
+- Strengths and Weaknesses: 
+	
+	This method allows the user to create any sort of SQL query and provide that using the cursor/execute methods. It also gives the ability to pass in parameters. 
+
+	Weakness is that it requires the writer to have to write the query out in the correct syntax, and can cause many errors if the SQL syntax is not mastered. 
+
+-------------------------------------------------------------------------------------------------------
+
+- Lessons Learned: 
+
+	How to connect a python program to a database using the sqlite3 library
+
+	How to write queries and query a database with a user given input 
+
+	How to access the results obtained from a query and print them out.

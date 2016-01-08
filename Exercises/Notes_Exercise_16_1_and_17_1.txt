@@ -1,0 +1,61 @@
+Notes for Exercise 16.1/17.1
+Walid Chatila, 11/9/15
+
+16.1:
+	- Add some try/except blocks in your DNA and codon_table modules from Lecture 15.
+
+17.1:
+	-Convert your modules for DNA sequence and codons to a codon_table and DNASeq class.
+	-Demonstrate the use of this module and the codon table module to translate an amino-acid sequence in all six-frames with just a few lines of code.
+
+---------------------------------------------------------------------------------------------------------
+
+- Methods:
+
+	The purpose of this program was to alter the modules, created in the previous assignemt, so that they would be object oriented programs with the use of classes. Two classes were created and used as modules for this program. The DNAseq class has a sequence as an attribute and consists of different methods that are associated with a DNA sequence. The codon_table class has the table as an attribute and consists of different methods that will lead to the translation of a sequence. In addition to these changes, another task was to implemnent various try/except blocks throughout the code and the modules. 
+
+
+	-DNASeq class:
+		
+		This class has one attribute and that is the DNA sequence which is saved to the variable seq. It includes many different methods: change the sequence to read in sequence, upper-case, sequence lenght, sequence copmlement, reversed sequence, reverse complement, starts with a met, start codon in a frame 1, total number of amaino acids, percent GC, tandem repeat checker, reverse complement palindorme checker. For most of these methods they only take in self as a paramter and the attribute self.seq is used throughout.
+
+		The attribute seq is initilized as an empty string. It is set to the actual sequence when the read method is called. This method will open the file, and read the sequence. Then it will set the seq attribute to the actual sequence that was read from the file.
+
+		The implementaton of try/except blocks was done in the complement method. The original method would return a key error if a nucleotide in a seuqence was not present in the complement dictionary that inclusdes A, T, G, and C. To accomodate for this a try/except block was used to check for a TypeError would result when the nucleotide was not present in the dictionary. The except block used a lambda function to allow the get method to return the nucleotide itself if it was not present in the dictionary.
+
+	-Codon_table class:
+
+		This class has one attribute which is the codon_table. This is intiallized as an empty dictionary. It includes multiple methods that are used to translate a sequence: read in codont table, get the amino acid for a codon, check if initial codon is a valid start codon, the amino acid checker (ambigous aa), and the translate method. The attribute table is set insdie the read codon table method. This method will open the file, read the file, move the into an appropriately formatted dictionary and then save this dictionary to the table attribute. 
+
+		The try/except blocks were used in multiple methods throughout this class. The firt use comes in the aminoacid method. Instead of using an if/else stametent to check if the codon is present in the dictiaonry, a try/except block will check the codon in the dictionary, if a key error occurs the amino acid returned will be an X. The next use of try/except blocks comes in the is_init method. The starts_with_start_codon valuse is initialized to True. A try/except block will be used to check if the start codon is not a valid codon and will accomodate for any KeyErros that will arrise. It then uses an if statment to check that initial codon is either True or false. 
+
+		A third use of a try/except block comes in the aa_checker method. The try part of the block will check if the created codon using (A,T,C,G in the third position) is a valid codon, if it is it will get added to the set. However, if it is not a valid codon and doesnt exist in the table, returning a key error, a 'x' will be returned. In this case the block is used to check for outliers that would be caused by an addition of N or other nucleotides not present in the codon table. 
+
+	- Program that calls the modules:
+
+		In this program the classes are imported from the modules. First an instance of the codon_table is created and saved as codons. Secondly, an instance of the DNASeq class is created and saved as sequence. 
+
+		Next two try/except blocks are used seperately to make sure that the files enerted are present on the command line, and that they are valid files in the correct location. The try blocks will called the read methods on the codons and sequence instances, respectively. The parameter for both of these is the inputted value from the command-line. Next the except bblocks will check that there is no indexError which would result from not inputting a file on the command line, or that there is no IOError which would be the result of an incorrenct file name or missing file. 
+
+		After the checks are completed and the attributes of the instances have been saved using the read files. The is_init method is called on the codons instance with a paramter of the first 3 nucleotides (1st codon). Next to check for all 6 frames, a for loop is used to go through 1,2, and 3. For each iteration, the frame is set to a postive or negative value which would give (1, -1, 2, -2, 3, -3). For the postive frames the translate method is called on the codons instanse, and the seq and frame are passed in. For the negatvie frames the translate method is also called the same way. However, instead of passing the seq in, the reverse complement has to be passed in. In order to do this, the reverse_comp method is called on the sequence instance. 
+
+
+	------------------------------------------------------------------------------------------------------
+
+	-Strengths and Weaknesess:
+
+		- The use of the try and except blocks will elliminate any errors that the user could encounter due to programming erros. 
+
+		- Using classes in the modules allows for a cleaner approach and the implementation of object oriented programmin.
+
+		- Using classes allows for creating multiple instance in the program and being able to seperate them and their methods respectively.
+
+		- Classes in modules also allow for way to use the class in various programs, and it will allow for ability to use any of there methods in an organize manner. 
+
+	-----------------------------------------------------------------------------------------------------
+
+	-Lessons Learned:
+
+		- Object oreiented programmin with the implementation of classes 
+		- the use of try/except blocks to try and eliminate any erros in the code 
+

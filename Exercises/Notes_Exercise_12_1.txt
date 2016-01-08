@@ -1,0 +1,53 @@
+Notes for Exercise 12.1
+Walid Chatila,  10/23/15
+
+Write a program that analyzes a PDB file (filename provided on the command-line!) to find pairs of lysine residues that might be linked if the BS3 cross-linker is used.
+	-The rigid BS3 cross-linker is approximately 11 A long.
+	- Write two versions, one that computes the distance between all pairs of lysine residues, and one that uses the NeighborSearch technique.
+
+------------------------------------------------------------------------------------
+
+-Methods: 
+
+ The purpose of this program is two write two different way of checking for potential BS3 cross-linkers. These are two Lys residues that interact on the NZ atom, and are about 11 A long. 
+
+ The file name is inputted using a command-line argument. The split() method is used to split the string file name on the period and get the first index which corresponds to the actually protein name that is located in the file. This protein name will be used in the parser. 
+
+ The Biopython PDB module is imported and used throughout this program. A PDB parser is crated using the PDBParser method and is then used to parse through the given PDB file and saved into the structure variable. The model is the first index of the structure. The structure contains all the chains of the protein. This program is only taking into consideration the first chain, which is denoted as 'A'. 
+
+ bs3_slow(a):
+
+ 	This function first creates a list of the all the Lys residues that are located in the inputted chain. It does this using list comprehension and an if statement to check if the residue has LYS as its name.
+
+ 	The created Lys residue list is iterated through using a for loop, for every residue the index of the residue is saved as a variable. A nested for loop is used to iterate through the rest of the residues, the index of this residue will be saved to a variable as well. To make account for any key errors, an if statement is used to check multiple conditions. First it ensures that the first residue index is smaller than the second; this eliminates any multiple values that could arise. Secondly, the has_id() method is used to make sure that the specific residues have the "NZ" atom; which will take care of the key error that would appear if the atom was not present for the atom. Finally, the distance between the two atoms is checked to be between 10 and 12 (approximately 11). 
+
+ 	If the residues meet all of the above conditions, their index positions and atom positions are appended to their specific lists which will be returned as a dictionary. 
+
+ bs3_neighbor(a): 
+
+ 	This function first creates a list of the all the Lys residues that are located in the inputted chain. It does this using list comprehension and an if statement to check if the residue has LYS as its name. Secondly a list of the NZ atom positons is created using list comprehension as well. 
+
+ 	The NeighborSearch method is called on the list of NZ atom positions and saved to a variable. Then a for loop is used to iterate through the list of NZ atoms while using enumerate to keep track of the specific indices. A nest for loop used to search through Neighbors and check that the distance between the two atoms is less than 12. The get_parent() method is used to move up a position and get back to the residue for that specific atom. Then the index for both residues is saved to a variable. After this, an if statement is used to check that the distance is larger than 10, this is done because the neighbor search does not check for both he upper and lower bounds.
+
+ 	If the residues meet all of the above conditions, their index positions and atom positions are appended to their specific lists which will be returned as a dictionary. 
+
+
+ 	Output:
+ 		After both functions have been called, all the information is saved into a dictionary that will contain all the possible BS3 cross-links and their potential information. A for loop is used to iterate through the dictionary and print out a human-readable way of seeing all the possible cross-links and their distances. 
+-----------------------------------------------------------------------------------
+ 
+-Strength and Weakness:
+
+	- The neiborssearch method is faster and should be used for a more robust approach. 
+	
+	- A potential weakness is that this will only find links that have NZ as an atom. If there is a problem with the PDB file where it is missing some information about some residues, it could lead to a false interpretation of the possible crosslinks. 
+
+	- Only one chain is checked, to get the exact number of links, all the chains of this protein would have to be looked at. 
+
+-----------------------------------------------------------------------------------
+
+-Lessons Learned:
+
+	- How to implement and use the different methods of the PDB module of biopython.
+		- parser and neighbor search
+	- Learned about the structure of PDB files

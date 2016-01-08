@@ -1,0 +1,41 @@
+Notes for Exercise 20.1
+Walid Chatila  11/23/15
+
+Find potential fruit fly / yeast orthologs
+	-download the files and uncompress them
+	-serach fruit fly ribosomal proteins against yeast ribosomal proteins
+	-for each fruit fly query, ooutput the best yeast protein if it has a significant E-Value.
+		-What ribosomal protein is most highly conserved between fruity fly and yeast. 
+----------------------------------------------------------------------------------------------------
+
+- Methods:
+		
+		The first step of this assignment was to download the fruit fly and yeast ribosomal prtoteomes from the data directory. After uncompressing the two files, the makeblastdb command was used to make the yeast ribosomal proteome file the into the database that will be queried. The Fruit fly file is kept as fasta file and will be used to conduct the BLAST queries. 
+
+
+		To run the Blast program the the NCBI blastp commandline library is imported from the biopython module. This library gives the ablility to run blast through the commanline from within the python program. To complete this, the blast program path is given, then the query file name is given and the database file name is given as well. The command line is built using the methods provided by the imported library, by passing the parameters discussed above. In addition the output format is set to xml and outputted to the results.xml file. After setting up the commandline it is run and the blast serach is completed, passing the results to the results.xml file provided above. 
+
+		After completing the Blast search, the results can be parsed using the NCBIXML libary imported from biopython. Since the top alignment for every query is the first alignment returned in the alignments list, only the first index is taken as the top alignment. Also the first hsp is taken from the hsps list. Then the alignment e_value is checked to determin if it is significant, if it is less than 1e-10, the query protein, the alignment protine and the e-value are printed out. 
+
+		To determin which of the proteins is the most highly conserved, the the query prtoein, alignment protein, e-value and the identities are added to a dictionary. The alignment e_value is then found by using the min method with list comprehnshion, if there are more than one with the same e_value a list is created of all the alignments. Then the identities are taken and check to determine which alignment of these had the highest identities number. This will determin which query and alignement were most highly conserved. 
+
+--------------------------------------------------------------------------------------------------------
+
+- Strengths and Weakness:
+	
+	Uses the both the e-value and the identities to determine which is most highly conserved.
+		- Takes care of the case where more than one hit as the same e-value.
+		- Gives a more accurate determination of the most highly conserved. 
+
+	Uses blast locally:
+		- allows for any query or database to bes used in the blast search
+		-the blast search is a lot faster 
+	Uses NCBIXML parser:
+		- doesnt requrie using elementtree to parse through the XML file
+
+--------------------------------------------------------------------------------------------------------
+
+Lessons Learned:
+	
+	How to run blast locally, and determine which query file and database to use.
+	How to parse through blast XML results. 

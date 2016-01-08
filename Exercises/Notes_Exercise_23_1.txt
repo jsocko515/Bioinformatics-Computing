@@ -1,0 +1,36 @@
+Exercise 23.1
+Walid Chatila  11/30/15
+Write a python program using SQLObject to find the taxonomic lineage of a user-supplied organism name.
+ 	- Make sure to used the small_taxa.db3 file.
+-------------------------------------------------------------------------------------------------------
+
+-Method
+	
+	This program utilizes the model program that was created in class. This program has an init function that is used to connect other programs to the database that is being used. In addition it has seperate classes for each of the tables in the database, specifying each column and its type. The SQLObject module is used to easily query the small_taxa database. 
+
+	An organism name (common name) is inputted by the user on the command line.  A try/except block is used to check that the name is actually presented. Next the selectBy statement is used to get the corresponding row from the name table for the inputted value. A second try/except block is used to determine that the value is present in the database. 
+
+	After the row has been retrieved from the Name table, the corresponding taxonomy row is retrieved for this entry. From this the scientific name, parents, and children can all be retrieved as well. 
+
+	Finally to get the lineage of this entry, a while loop is used with the condition that the current row is not equal to the parent row. Within this condition, the scientific name is added to the lineage list, and then the current row is saved as the parent row. This allows the loop to continue until it gets to the root where the current row and parent row are the same value. The lineage list is iterated through and the values are printed out to the user. 
+
+
+--------------------------------------------------------------------------------------------------------
+
+- Strengths and Weaknesses:
+
+	The use of a separate model file allows the separation of the database connection, loading, and clearing. 
+
+	The use of SQLObject allows us to do queries using joins that would be much more complicated using SQL. 
+
+---------------------------------------------------------------------------------------------------------
+
+- Lessons Learned:
+	
+	How to use a separate model file which specifies the columns of a table with the foreign IDs and joins. 
+
+	How to use the different methods of SQLObject
+
+	How to use a while loop. 
+
+	

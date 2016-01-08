@@ -1,0 +1,30 @@
+Exercise 22.1
+Walid Chatila, 11/30/15
+
+Write a python program using SQLObject to lookup the scientific name for a user-supplied organism name. 
+-----------------------------------------------------------------------
+
+- Method:
+
+	By utilizing the SQLObject wrapper, the SQL syntax can be eliminated from querying the database. Since the database is already created, a legacy database, SQLobject can be used to interpret what tables/rows this database has. The id column has to be given to SQLobject if it was not supplied in the table. Also, any joins and foreign keys have to be given as well. All of this is done in the model.py. Which has two classes for each of the tables in the database. 
+
+
+	Since the program requires a user-supplied organism name, it will be taken in as a parameter on the command line. After this a try/except block is used to  get the whole row using a selectBy sqlobject method on an instance of the Name class where the name is equal to the organism name supplied. This is simply a wrapper for a select query that gets all the rows where the name is equal to the supplied organism name. After the row is saved to the variable, since the taxa table and the name table both have the tax_id, which is a foreign key. It is able to retrieve the scientific name from the taxa table where the tax_id are equivalent. 
+---------------------------------------------------------------------
+
+- Strengths and Weaknesses: 
+
+	The utilization of SQLObject which allows the minimization of writing SQL syntax
+
+	Provides a easier way to query the database focusing on only writing python syntax 
+
+	The select query, using the selectBy method allows for an easy way to set specific parameters.
+
+	The use of python methods is enable in the querying of the database.
+----------------------------------------------------------------------
+
+- Lessons Learned:
+
+	The use of the SQLObject module as a wrapper on top of a database, giving an easier way to query the database. 
+
+	How SQLObject can automatically determine columns of a table, by providing it minimal information (Legacy Databases)

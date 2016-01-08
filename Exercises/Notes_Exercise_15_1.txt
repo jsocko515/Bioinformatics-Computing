@@ -1,0 +1,60 @@
+Notes for Exercise 15.1
+Walid Chatila, 11/2/15
+
+-Create MyDNAStuff module
+-Create codon_table module
+-Demonstrate the use of these modules to translate an amino-acid sequence in all six-frames with just a few lines of code.
+----------------------------------------------------------------
+
+-Methods:
+
+	The first part of this exercise required for the creation of two different modules. The first one was MyDNAStuff and the second one was codon_table.
+
+	MyDNAStuff is a module that is composed of different functions that can be used when dealing with DNA sequences.
+	Included functions:
+		- Read Sequence from file
+		- Make the sequence uppercase
+		- Get the length of the sequence
+		- Get the complement of the sequence
+		- Get the reverse of the sequence
+		- Get the reverse complement of the sequence
+		- Determine if the sequence starts with a Met codon
+		- Determine if the sequence has a frame 1 Met codon
+		- Determine the total number of amino acids
+		- The GC percentage of the sequence
+		- If the sequence is a tandem repeat
+		- If the sequence is a reverse complement palindrome
+
+	All of these functions are located inside this module and can be accessed by importing the module in the desired program. 
+
+	The next part of this exercise was to create the codon_table module. This module is composed of different functions that allow for the translation of DNA sequence into a polypeptide sequence(amino acid sequence).
+	Included Functions:
+		- Read a codon table from a file. And organize it into a dictionary that has every codon and their corresponding amino acid. This will also show if the codon is a start codon.
+		
+		- A function called amino_acid_seq which will  take in the frame that will be translated and append N's to the end to complete the sequence. It will then translate the sequence. However if there is an N as the third nucleotide of a codon, it will call the aa_checker. Finally it will return X if the codon does not have a valid amino acid in the dictionary. The second part of this function is to determine if the start codon of this sequence is a valid start codon by checking the dictionary. 
+		
+		- The aa_checker will determine if the codon containing the N in the third location can code for more than one amino acid. If it does code for more than one amino acid, a x is returned. However, if the multiple variations code for one amino acid, then that amino acid is returned and used in the sequence.
+
+		- The frames function is what allows for the translation in all six frames. For the negative frames, the reverse complement will be inputted as a parameter instead of the original sequence. 
+
+	To run this program in exercise_14_1.py, the two created modules have to be imported. This allows us to use the functions from the created modules. There is a check to ensure that the codon table and the DNA sequence have been given on the command line. 
+
+	The codon table will be passed into the function from the codon_table module that will read the table into a dictionary. Secondly, the DNA sequence will be passed into the function from the MyDNAStuff module that will open and read the sequence. 
+
+	After this the frames function from the codon_table module is called. The table, sequence, and reverse complement of the sequence are passed in. however to get the reverse complement, the function from MyDNAStuf is used. 
+
+	Finally the frames function returns a dictionary of the different frames and translated sequences. A for loop is used to iterate through and print out the results. 
+
+	------------------------------------------------------------
+
+	-Strength and Weaknesses:
+
+		- Due to the use of modules in this program, the created functions can now be implemented in any program. The functions have been checked and appear to be error free.
+
+		- This also makes the code written in the exercise more robust and clean, as it is only a small amount of code. 
+
+	-----------------------------------------------------------
+
+	-Lessons Learned:
+
+		-How to create modules and implement them in a program.

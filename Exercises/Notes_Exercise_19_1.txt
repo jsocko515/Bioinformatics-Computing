@@ -1,0 +1,44 @@
+Notes Exercise 19.1 
+Walid Chatila, 11/16/15
+
+Write a program using NCBI's E-Utilities to retrieve the ids of RefSeq human BRCA1 proteins from NCBI. 
+	- Use the query: "Homo sapiens"[Organism] AND BRCA1[Gene Name] AND REFSEQ
+
+Extend your program to search these protein ids (one at a time) vs RefSeq proteins (refseq_protein) using the NCBI blast web-service
+
+Further extend your program to filter the results for significance (E-value < 1.0e-5) and to extract mouse sequences (match "Mus musculus" in the description).
+
+--------------------------------------------------------------------------------------------------------
+
+- Methods:
+
+	The purpose of this program is to use NCBI Entrez Utilities to retrieve a set of ID's for a specific query which would be used to conduct a blast search. After the blast, the resulting alignments would be parsed and returned to the user.
+
+	- search_NCBI(email, db, term):
+
+		This function will conduct a search using the Entrez Utilities  Esearch function. In order to conduct this search, Entrez has to be imported from the Bio library. An email has to be provided to use the NCBI tools. In addtion, the database and the term that are being queried have to be provided for the search/ The result is read and saved to a variable. The IdLIst is then saved to a variable and returned so it can be used in the blast search. 
+
+	- blast(blat_type, db, id_list, e_value, organism_txid):
+
+		This function will conduct a blast search on an inputted set of IDs. In this case the ID's being taken in are GI ids. Since we are blasting on proteins, the blastp type is used. The database has to be specified, and in our case we are performing a blast on the refseq_protein database. In addition, extra parameters such as the e-value threshold, and the organism taxid can be inputted. For each id, the blast is conducted and the results are saved into an xml file. 
+
+	- blast_parser(id_list):
+
+		This function will take in the list of ids, and parse through all the XML blast files. For every blast result, it will iterate through the descriptions of all the alignments and print out the description title and the e-value. 
+
+--------------------------------------------------------------------------------------------------------
+
+- Strengths and Weaknesses:
+	
+	- This program has various weakness associated with the blast function. The first part is that an organism taxid has to be specified in order for the blast to work, you cannot perform a blast on the whole database. This is also true for the e-value threshold, it has to be pre-determined with the way this program is written. 
+
+	- Some strengths are that the program allows you to search through any of the NCBI databases, to run any type of blast query on any type of database. 
+--------------------------------------------------------------------------------------------------------
+
+- Lessons Learned:
+
+	- How to use the NCBI Entrez Utilities’ through the biopthyon library. This gives the ability to query the NDBI databases and retrieve any sort of information. 
+
+	- How to conduct a blast query through the NCBI blast web services. 
+
+	- How to parse through xml blast results. Descriptions/Alignments/HSP  
